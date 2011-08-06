@@ -5,6 +5,7 @@
 Provides functions to interact with the movie/series features of the IMDb iPhone API.
 """
 
+import re
 from .base import Imdb
 
 
@@ -27,6 +28,8 @@ class ImdbMovie(Imdb):
         url -- An IMDb URL to search for the ID
 
         """
+        if not url.endswith('/'):
+            url += '/'
         matches = re.search('/(tt[0-9]{7})/', url).group(1)
         if matches is not None:
             return matches
